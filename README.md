@@ -19,7 +19,11 @@ this name.
 
 ### Python wrapper
 
+In python:
+
+```python
 import sampen
+```
 
 Now sampen module contains two most important functions:
 _sampen_: calculates SampEn of a series
