@@ -26,5 +26,5 @@ import sampen
 ```
 
 Now sampen module contains two most important functions:
-_sampen_: calculates SampEn of a series
-_mse_: performs MSE analysis with SampEn as an entropy measure
+* _sampen_: calculates SampEn of a series
+* _mse_: performs MSE analysis with SampEn as an entropy measure
