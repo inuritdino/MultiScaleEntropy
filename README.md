@@ -9,7 +9,7 @@ This package contains a C-library and a Python wrapper around it.
 
 ### C-library compilation
 
-No external dependencies, just:
+No external dependencies (except for the math library), just:
 ```bash
 gcc -shared -o libsampen.so -O -Wall -fPIC sampen.c -lm
 ```
