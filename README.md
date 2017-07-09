@@ -19,14 +19,16 @@ this name.
 
 ### Python wrapper
 
-In python, assuming the current directory with the repository files
-and `libsampen.so` is **MultiScaleEntropy**:
+In python, assuming the current directory contains a directory (say,
+named **MultiScaleEntropy**) with the repository files and
+`libsampen.so`,
 
 ```python
 import MultiScaleEntropy
 ```
 
-Now `MultiScaleEntropy` module contains the two most important functions:
+will load the `MultiScaleEntropy` module, which has the two most
+important functions:
 * `sampen`: calculates SampEn estimate of a series
 * `mse`: performs MSE analysis with SampEn as an entropy measure
 
