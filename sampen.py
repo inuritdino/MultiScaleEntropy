@@ -20,7 +20,8 @@ import ctypes
 import warnings
 import numpy as np
 from numpy.ctypeslib import ndpointer
-import matplotlib.pyplot as plt
+### Uncomment the following if you need the tests at the end of this file
+# import matplotlib.pyplot as plt
 
 def init_libsampen():
     libdir = os.path.dirname(__file__)

@@ -27,5 +27,8 @@ import MultiScaleEntropy
 ```
 
 Now `MultiScaleEntropy` module contains the two most important functions:
-* _sampen_: calculates SampEn estimate of a series
-* _mse_: performs MSE analysis with SampEn as an entropy measure
+* `sampen`: calculates SampEn estimate of a series
+* `mse`: performs MSE analysis with SampEn as an entropy measure
+
+The wrapper dependes only on NumPy besides the standard Python 3 modules.
+
