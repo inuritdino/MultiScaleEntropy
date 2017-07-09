@@ -1,4 +1,20 @@
+"""
+    Multi-Scale Entropy analysis wrapper in Python.
+    Copyright (C) 2017  Ilya Potapov
 
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
 import os
 import ctypes
 import warnings
@@ -39,6 +55,23 @@ def init_libsampen():
 libsampen = init_libsampen()
 
 def sampen(data, m=2, r=0.2, norm=True, sd=True):
+    """
+    Calculate SampEn of a series (1D array)
+    
+    Input:
+    
+    data - is 1D data array (converted to a NumPy array)
+    m - maximum epoch length (int, default 2)
+    r - tolerance level (float, default 0.2)
+    norm - whether to normalize the data (True)
+    sd - whether to calculate standard deviation of SampEn (True)
+    
+    Returns:
+    
+    SE - SampEn values for the data, an array for a range of epoch lengths from 1 to m
+    SESD - SE's standard deviation estimate if sd=True (default)
+
+    """
     N = len(data)
     data = np.array(data)##make sure we are dealing with NumPy array
     if data.ndim != 1:
@@ -65,7 +98,25 @@ def sampen(data, m=2, r=0.2, norm=True, sd=True):
     else:
         return SampEn
 
-def mse(data, m=2, r=0.2, maxscale=10, sd=False):
+def mse(data, m=2, r=0.2, maxscale=10, norm=True, sd=False):
+    """
+    Calculate SampEn values for a range of scales for a series (1D array)
+
+    Input:
+
+    data - is 1D data array (converted to a NumPy array)
+    m - epoch length (int, default 2)
+    r - tolerance level (float, default 0.2)
+    maxscale - maxscale to use (int, default 10)
+    norm - whether to normalize the data (True)
+    sd - whether to calculate standard deviation of SampEn (True)
+
+    Returns:
+    SE - an array of SampEn value for each scale from 1 to maxscale
+    SESD - an array of standard deviation estimate for SampEn values 
+    for each scale from 1 to maxscale, only if sd=True (default)
+
+    """
     N = len(data)
     data = np.array(data)## make sure we deal with NumPy array
     if data.ndim != 1:
@@ -78,6 +129,8 @@ def mse(data, m=2, r=0.2, maxscale=10, sd=False):
         SampEnSD = np.require(SampEnSD, float, ('C', 'A'))
 
     ## Call C routine
+    if norm:
+        libsampen.normalize(data, N)
     if sd:
         libsampen.MSESD(data, N, m, r, maxscale, SampEn, SampEnSD)
         return (SampEn, SampEnSD);

@@ -3,6 +3,8 @@
 -------------------------------------------------------------------------------
 sampen: calculate Sample Entropy
 Copyright (C) 2002-2004 Doug Lake
+Copyright (C) 2004 Madalena Costa
+Copyright (C) 2017 Ilya Potapov
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
@@ -422,13 +424,13 @@ void MSE(double *data, unsigned long int n, int m, double r, int max_scale, doub
     return ;
   }
   
-  //Perform normalization on the original data
-  normalize(data, n);
+  //Perform normalization on the original data (transferred to a python call)
+  //normalize(data, n);
 
   //Perform the loop over the scales
   for(i = 1; i <= max_scale; i++){
     CoarseGraining(y, n, i, data);
-    SE[i-1] = SampleEntropy(y, n, m, r, i);
+    SE[i-1] = SampleEntropy(y, n, m, r, i);//one can use sampen() function as well
   }
 
   free(y);
@@ -445,8 +447,8 @@ void MSESD(double *data, unsigned long int n, int m, double r, int max_scale, do
     return ;
   }
   
-  //Perform normalization on the original data
-  normalize(data, n);
+  //Perform normalization on the original data (tranferred to a python call)
+  //normalize(data, n);
 
   //Temporary variables to store SE and SESD values
   double *se_tmp = (double *)malloc((size_t)(m+1)*sizeof(double));
