@@ -110,12 +110,12 @@ def mse(data, m=2, r=0.2, maxscale=10, norm=True, sd=False):
     r - tolerance level (float, default 0.2)
     maxscale - maxscale to use (int, default 10)
     norm - whether to normalize the data (True)
-    sd - whether to calculate standard deviation of SampEn (True)
+    sd - whether to calculate standard deviation of SampEn (False)
 
     Returns:
     SE - an array of SampEn value for each scale from 1 to maxscale
     SESD - an array of standard deviation estimate for SampEn values 
-    for each scale from 1 to maxscale, only if sd=True (default)
+    for each scale from 1 to maxscale, only if sd=True
 
     """
     N = len(data)
